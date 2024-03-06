@@ -1,0 +1,5 @@
+.img {
+  background: url("./../../../../assets/note.jpg");
+  background-size: cover;
+  height: 80vh;
+}

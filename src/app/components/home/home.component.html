@@ -1,0 +1,64 @@
+<mat-form-field class="w-100" appearance="outline">
+  <mat-label>search</mat-label>
+  <input matInput type="text" [(ngModel)]="value" />
+
+  <button
+    *ngIf="value"
+    matSuffix
+    mat-icon-button
+    aria-label="search"
+    (click)="value = ''"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>
+
+<button
+  mat-raised-button
+  color="primary"
+  (click)="openDialog()"
+  class="d-block ms-auto"
+>
+  Add note
+</button>
+
+<div class="row my-5 g-4">
+  <div class="col-md-4" *ngFor="let note of notes | search : value">
+    <div class="card shadow">
+      <div class="card-body">
+        <button
+          class="position-absolute end-0"
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          aria-label="Example icon-button with a menu"
+        >
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item [swal]="deleteSwal">
+            <mat-icon>delete</mat-icon>
+            <span>delete</span>
+          </button>
+
+          <swal
+            #deleteSwal
+            title="Delete {{ note.title }}?"
+            text="This cannot be undone"
+            icon="question"
+            [showCancelButton]="true"
+            [focusCancel]="true"
+            (confirm)="deleteNote(note)"
+          >
+          </swal>
+
+          <button mat-menu-item (click)="setData(note)">
+            <mat-icon>update</mat-icon>
+            <span>update</span>
+          </button>
+        </mat-menu>
+        <h3>{{ note.title }}</h3>
+        <p>{{ note.content }}</p>
+      </div>
+    </div>
+  </div>
+</div>

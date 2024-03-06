@@ -1,0 +1,65 @@
+<section class="min-vh-100">
+  <div
+    class="row g-0 rounded shadow overflow-hidden d-flex justify-content-center align-items-center"
+  >
+    <div class="col-md-8 img rounded d-none d-md-block"></div>
+
+    <div class="col-md-4">
+      <form
+        class="example-form p-4"
+        [formGroup]="loginForn"
+        (ngSubmit)="login()"
+      >
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Email</mat-label>
+          <input
+            type="email"
+            matInput
+            placeholder="Ex. pat@example.com"
+            formControlName="email"
+          />
+
+          <mat-error *ngIf="loginForn.get('email')?.hasError('required')">
+            Please enter email address
+          </mat-error>
+
+          <mat-error *ngIf="loginForn.get('email')?.hasError('email')">
+            Please enter valid email address
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Enter your password</mat-label>
+          <input
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            formControlName="password"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+            type="button"
+          >
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+
+          <mat-error *ngIf="loginForn.get('password')?.hasError('required')">
+            Please enter your password
+          </mat-error>
+        </mat-form-field>
+
+        <button
+          [disabled]="!loginForn.valid"
+          mat-raised-button
+          color="primary"
+          class="d-block w-100"
+        >
+          login
+        </button>
+      </form>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,119 @@
+<section class="min-vh-100">
+  <div
+    class="row g-0 rounded shadow overflow-hidden d-flex justify-content-center align-items-center"
+  >
+    <div class="col-md-8 img rounded d-none d-md-block"></div>
+
+    <div class="col-md-4">
+      <form
+        class="example-form p-4"
+        [formGroup]="registerForm"
+        (ngSubmit)="register()"
+      >
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>name</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Ex. radwa"
+            formControlName="name"
+          />
+
+          <mat-error *ngIf="registerForm.get('name')?.hasError('required')">
+            Please enter your name
+          </mat-error>
+
+          <mat-error *ngIf="registerForm.get('name')?.hasError('minlength')">
+            minimum length is 3 characters
+          </mat-error>
+
+          <mat-error *ngIf="registerForm.get('name')?.hasError('maxlength')">
+            minimum length is 8 characters
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Email</mat-label>
+          <input
+            type="email"
+            matInput
+            placeholder="Ex. pat@example.com"
+            formControlName="email"
+          />
+
+          <mat-error *ngIf="registerForm.get('email')?.hasError('required')">
+            Please enter email address
+          </mat-error>
+
+          <mat-error *ngIf="registerForm.get('email')?.hasError('email')">
+            Please enter valid email address
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Enter your password</mat-label>
+          <input
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            formControlName="password"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+            type="button"
+          >
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+
+          <mat-error *ngIf="registerForm.get('password')?.hasError('required')">
+            Please enter your password
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>age</mat-label>
+          <input
+            type="number"
+            matInput
+            placeholder="Ex. your phone"
+            formControlName="age"
+          />
+
+          <mat-error *ngIf="registerForm.get('age')?.hasError('required')">
+            Please enter your phone number
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>phone</mat-label>
+          <input
+            type="tel"
+            matInput
+            placeholder="Ex. your phone"
+            formControlName="phone"
+          />
+
+          <mat-error *ngIf="registerForm.get('phone')?.hasError('required')">
+            Please enter your phone
+          </mat-error>
+
+          <mat-error *ngIf="registerForm.get('phone')?.hasError('min')">
+            minimum aphone is 18
+          </mat-error>
+        </mat-form-field>
+
+        <button
+          [disabled]="!registerForm.valid"
+          mat-raised-button
+          color="primary"
+          class="d-block w-100"
+        >
+          register
+        </button>
+      </form>
+    </div>
+  </div>
+</section>

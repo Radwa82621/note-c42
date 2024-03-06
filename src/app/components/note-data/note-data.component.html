@@ -1,0 +1,36 @@
+<section class="rounded shadow overflow-hidden p-4">
+  <form [formGroup]="form" class="w-100" (ngSubmit)="sendData()">
+    <h3 class="text-center">Add Note</h3>
+    <mat-form-field class="d-block w-100" appearance="outline">
+      <mat-label>title</mat-label>
+      <input matInput placeholder="title" formControlName="title" />
+    </mat-form-field>
+
+    <mat-form-field class="d-block w-100" appearance="outline">
+      <mat-label>content</mat-label>
+      <textarea
+        matInput
+        placeholder="content"
+        formControlName="content"
+      ></textarea>
+    </mat-form-field>
+
+    <button
+      *ngIf="data == null"
+      mat-raised-button
+      color="primary"
+      class="d-block w-100"
+    >
+      Add note
+    </button>
+
+    <button
+      *ngIf="data != null"
+      mat-raised-button
+      color="accent"
+      class="d-block w-100"
+    >
+      update note
+    </button>
+  </form>
+</section>
